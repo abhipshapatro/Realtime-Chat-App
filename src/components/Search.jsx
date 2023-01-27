@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const Search = () => {
 
-  const {currentUser} = useContext(AuthContext); 
+  const { currentUser } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -37,28 +37,28 @@ const Search = () => {
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
 
-      if(!res.exists()){
+      if (!res.exists()) {
 
         //create a chat in chats collection
-        await setDoc(doc(db, "chats", combinedId), {messages: []});
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
         //create user chats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
-            uid : user.uid,
-            name : user.name,
+            uid: user.uid,
+            name: user.name,
             photoURL: user.photoURL
           },
-          [combinedId+".date"]: serverTimestamp()
+          [combinedId + ".date"]: serverTimestamp()
         })
 
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
-            uid : user.uid,
-            name : user.name,
+            uid: user.uid,
+            name: user.name,
             photoURL: user.photoURL
           },
-          [combinedId+".date"]: serverTimestamp()
+          [combinedId + ".date"]: serverTimestamp()
         })
 
 
@@ -66,10 +66,10 @@ const Search = () => {
     } catch (err) {
       setErr(true);
     }
-    
+
     setUser(null);
     setUsername("");
-    
+
   };
 
   return (
