@@ -10,13 +10,12 @@ function App() {
   const { currentUser } = useContext(AuthContext);
   // console.log(currentUser);
 
-  const ProtectedRoute = ({ currentUser }) => {
+  const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return(
-        <Navigate to={"/login"} />
-      )
-      
+      return <Navigate to={"/login"} />;
     }
+
+    return children;
   };
   return (
     <BrowserRouter>
