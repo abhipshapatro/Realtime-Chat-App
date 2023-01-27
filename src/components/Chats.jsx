@@ -7,6 +7,7 @@ import { db } from '../firebase';
 const Chats = () => {
 
   const [chats, setChats] = useState({});
+  
   const { currentUser } = useContext(AuthContext);
   const {dispatch} = useContext(ChatContext);
 
@@ -38,7 +39,7 @@ const Chats = () => {
           <img src={chat[1].userInfo.photoURL} alt="" />
           <div className="userInfo">
             <span>{chat[1].userInfo.name}</span>
-            <p>{chat[1].userInfo.lastMessage?.text}</p>
+            <p>{chat[1].lastMessage?.text}</p>
           </div>
         </div>
       ))}
